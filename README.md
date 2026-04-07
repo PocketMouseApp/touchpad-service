@@ -4,11 +4,45 @@ Backend service for PocketMouse. This application allows a mobile device to cont
 
 ---
 
+## Quick Start
+
+### Option 1 — Use the prebuilt executable (recommended)
+
+1. Go to the Releases section of this repository
+2. Download the latest `.exe` file
+3. Run the executable (no installation required)
+4. Ensure your computer and phone are on the same Wi-Fi network
+5. Open the PocketMouse app and connect
+
+The application will run in the system tray.
+
+---
+
+### Option 2 — Run from source
+
+#### Requirements
+
+* Python 3.9 or higher
+
+#### Install dependencies
+
+```bash id="q7z2l1"
+pip install websockets pynput pystray pillow
+```
+
+#### Run
+
+```bash id="x92kdl"
+python touchpad_service.py
+```
+
+---
+
 ## Overview
 
 Touchpad Service runs locally on your computer and listens for input events sent from a mobile client over a WebSocket connection. These events are translated into native mouse actions using the system input API.
 
-The service also includes a lightweight UDP-based discovery mechanism, allowing the mobile app to automatically detect the host machine on the same network.
+The service also includes a UDP-based discovery mechanism, allowing the mobile app to automatically detect the host machine on the same network.
 
 ---
 
@@ -33,45 +67,6 @@ This application does not collect, store, or transmit any personal data.
 
 ---
 
-## Architecture
-
-Mobile client (Flutter) communicates with this service over WebSocket. The service processes incoming events and executes corresponding mouse actions on the host system.
-
----
-
-## Getting Started
-
-### Requirements
-
-* Python 3.9 or higher
-
-### Installation
-
-Install dependencies:
-
-```bash
-pip install websockets pynput pystray pillow pyinstaller
-```
-
-### Running the service
-
-```bash
-python touchpad_service.py
-```
-
-Once started, the application will run in the system tray and display the local IP address and port.
-
----
-
-## Usage
-
-1. Ensure your computer and mobile device are connected to the same network
-2. Launch the Touchpad Service
-3. Open the PocketMouse app on your phone
-4. The app will automatically discover and connect to the service
-
----
-
 ## Network Configuration
 
 | Purpose          | Port |
@@ -85,15 +80,15 @@ If connection issues occur, ensure these ports are allowed through your firewall
 
 ## Discovery Protocol
 
-The mobile client sends a UDP message:
+Client sends:
 
-```
+```id="l2k9q3"
 TOUCHPAD_DISCOVER
 ```
 
-The service responds with:
+Server responds with:
 
-```json
+```json id="z81a9x"
 {
   "ip": "<local_ip>",
   "port": 8765
@@ -116,19 +111,17 @@ The service responds with:
 
 ---
 
-## System Tray
+## Distribution
 
-The application runs in the system tray and provides:
+Prebuilt executables are available in the Releases section.
 
-* Connection status indicator
-* Local IP address and port
-* Option to exit the application
+You can also build the executable yourself using PyInstaller.
 
 ---
 
-## Distribution
+## License
 
-Prebuilt executables are available in the Releases section for users who prefer not to run the application from source.
+MIT License
 
 ---
 
