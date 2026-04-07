@@ -1,0 +1,1 @@
+pyinstaller --onefile --noconsole --name "TouchpadService" touchpad_service.py
